@@ -1,4 +1,5 @@
 import cosas.*
+import almacen.*
 
 object camion {
 	const property cosas = #{}
@@ -6,6 +7,7 @@ object camion {
     const pesoMaximo = 2500
 		
 	method cargar(unaCosa) {
+        unaCosa.cambio()
 		cosas.add(unaCosa)
 	}
 
@@ -43,6 +45,7 @@ object camion {
         return self.objetosQueSuperanPeligrosidad(cosa.nivelPeligrosidad())       
     }
 
+//
     method puedenCircularEnRuta(nivelMaximoPeligrosidad){
         return !self.excedidoDePeso() && self.excedidoDeNivel(nivelMaximoPeligrosidad)
     }
@@ -51,6 +54,26 @@ object camion {
         return self.objetosQueSuperanPeligrosidad(nivel).size() >= 1
         // probar con .isEmpty()
     }
+//
 
+    method tieneAlgoQuePesaEntre(min, max){
+        return cosas.any({ cosa => self.estaCosaEntre(cosa, min, max)})
+    }
+
+    method estaCosaEntre(cosa, min, max){
+        return cosa.peso() >= min && cosa.peso() <= max
+    }
+//
+    method cosaMasPesada(){
+        return cosas.max( { cosa => cosa.peso()})
+    }
+
+    method pesos(){
+        return cosas.map( { cosa => cosa.peso()})
+    }
+
+    method totalBultos(){
+        return cosas.sum( { cosa => cosa.bulto()})
+    }
 
 }

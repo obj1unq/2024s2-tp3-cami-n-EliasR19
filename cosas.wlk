@@ -1,6 +1,10 @@
 object knightRider {
 	method peso() { return 500 }
 	method nivelPeligrosidad() { return 10 }
+    method bulto() { return 1}
+    method cambio(){
+        null
+    }
 }
 
 object bumblee{
@@ -13,6 +17,11 @@ object bumblee{
     method peso(){  return 800 }
 
     method nivelPeligrosidad() { return forma.nivelPeligrosidadForma()}
+    method bulto() { return 2}
+
+    method cambio(){
+        forma = robot
+    }
 }
 
 object auto{
@@ -27,13 +36,25 @@ object ladrillos{
     var property ladrillos = 0
 
     method peso() { return ladrillos*2}
-    method nivelPeligrosidad() { return 2 } 
+    method nivelPeligrosidad() { return 2 }
+    method bulto() {
+        const bulto = if(ladrillos <= 100 ) 1 else if (ladrillos <= 300) 2 else 3
+        return bulto
+    }
+
+    method cambio(){
+        ladrillos = ladrillos + 12
+    }
 }
 
 object arenaGranel{
     var property peso = 0
 
     method nivelPeligrsosidad() { return 2} 
+    method bulto() { return 1}
+    method cambio() {
+        peso = peso + 20
+    }
 }
 
 object bateria{
@@ -48,6 +69,11 @@ object bateria{
     }
 
     method nivelPeligrosidad() { return if(tieneMisiles) 100 else 0}
+    method bulto(){ return if(tieneMisiles) 2 else 1}
+
+    method cambio(){
+        tieneMisiles = true
+    }
 }
 
 object contenedor{
@@ -66,11 +92,22 @@ object contenedor{
     method objetoMasPeligroso(){
         return cosasDentro.max( { cosa => cosa.nivelPeligrosidad()})
     }
+
+    method bulto(){ return 1 + cosasDentro.sum( { cosa => cosa.bulto()})}
+
+    method cambio(){
+        cosasDentro.forEach({ cosa => cosa.cambio()})
+    }
 }
 
 object residuosRadiactivos{
         var property peso = 0
         method nivelPeligrosidad() { return 200}
+        method bulto() { return 1}
+
+        method cambio(){
+            peso = peso + 15
+        }
     }
 
 object embalaje{
@@ -82,8 +119,14 @@ object embalaje{
 
     method peso() { return objetoEnvuelto.peso()}
     method nivelPeligrosidad() { return objetoEnvuelto.nivelPeligrosidad() / 2}
+    method bulto() { return 2}
+
+    method cambio(){
+        null
+    }
 
 }
+
 
 
 
