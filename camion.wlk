@@ -2,7 +2,7 @@ import cosas.*
 import almacen.*
 
 object camion {
-	const property cosas = #{}
+	const property cosas = []
     const tara = 1000
     const pesoMaximo = 2500
 		
@@ -74,6 +74,12 @@ object camion {
 
     method totalBultos(){
         return cosas.sum( { cosa => cosa.bulto()})
+    }
+
+// Almacen
+    method dejarCarga(lugar){
+        lugar.almacenar(cosas)
+        cosas.clear()
     }
 
 }
