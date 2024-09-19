@@ -19,7 +19,7 @@ object camion {
         return cosas.all({cosa=> cosa.peso().even()})
     }
 
-    method hayAlgunoQuePese(peso){
+    method hayAlgunoQuePesa(peso){
         return cosas.any({cosa => cosa.peso() == peso})
     }
 
@@ -41,13 +41,13 @@ object camion {
         return cosas.filter({cosa => cosa.nivelPeligrosidad() > nivel})
     }
 
-    method objetoMasPeligrosoQue(cosa){
+    method objetosMasPeligrososQue(cosa){
         return self.objetosQueSuperanPeligrosidad(cosa.nivelPeligrosidad())       
     }
 
 //
-    method puedenCircularEnRuta(nivelMaximoPeligrosidad){
-        return !self.excedidoDePeso() && self.excedidoDeNivel(nivelMaximoPeligrosidad)
+    method puedeCircularEnRuta(nivelMaximoPeligrosidad){
+        return !self.excedidoDePeso() && !self.excedidoDeNivel(nivelMaximoPeligrosidad)
     }
 
     method excedidoDeNivel(nivel){
@@ -77,9 +77,48 @@ object camion {
     }
 
 // Almacen
-    method dejarCarga(lugar){
-        lugar.almacenar(cosas)
+    method transportar(destino, camino){
+        self.validarTransporte(destino, camino)
+        destino.almacenar(cosas)
         cosas.clear()
+    }
+
+    method validarTransporte(destino, camino){
+        if(self.puedeTransportar(destino, camino)){
+            self.error("No se puede realizar el transporte")
+        }
+    }
+
+    method puedeTransportar(destino, camino){
+        return !self.excedidoDePeso() && 
+            !destino.tieneLugarPara(self) &&
+            !camino.puedeCircular(self) 
+    }
+
+
+}
+
+
+//Caminos
+
+object ruta9{
+    method nivelPeligrosidad() { return 11}
+
+    method puedeCircular(vehiculo){
+        return vehiculo.puedenCircularEnRuta(self.nivelPeligrosidad())
+    }
+}
+
+object caminosVecinales{
+    method nivelPeligrosidad() { null}
+    var pesoMaximo = 0
+
+    method pesoMaximo(_pesoMaximo){
+        pesoMaximo = _pesoMaximo
+    }
+
+    method puedeCiruclar(vehiculo){
+        return vehiculo.pesoTotal() <= pesoMaximo
     }
 
 }

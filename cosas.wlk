@@ -7,7 +7,7 @@ object knightRider {
     }
 }
 
-object bumblee{
+object bumblebee{
     var forma = null
 
     method forma(_forma){
@@ -33,7 +33,11 @@ object robot{
 
 //
 object ladrillos{
-    var property ladrillos = 0
+    var  ladrillos = 0
+
+    method cargar(cantidad){
+        ladrillos = ladrillos + cantidad
+    }
 
     method peso() { return ladrillos*2}
     method nivelPeligrosidad() { return 2 }
@@ -50,7 +54,7 @@ object ladrillos{
 object arenaGranel{
     var property peso = 0
 
-    method nivelPeligrsosidad() { return 2} 
+    method nivelPeligrosidad() { return 2} 
     method bulto() { return 1}
     method cambio() {
         peso = peso + 20
@@ -60,7 +64,7 @@ object arenaGranel{
 object bateria{
     var tieneMisiles = false
 
-    method misiles(_tieneMisiles){
+    method tieneMisiles(_tieneMisiles){
         tieneMisiles = _tieneMisiles
     }
 
@@ -79,7 +83,7 @@ object bateria{
 object contenedor{
     const cosasDentro = []
 
-    method guardad(cosa){
+    method guardar(cosa){
         cosasDentro.add(cosa)
     }
 
@@ -113,8 +117,8 @@ object residuosRadiactivos{
 object embalaje{
     var  objetoEnvuelto = null
 
-    method objetoEnvuelto(_objetoEnvuelto){
-        objetoEnvuelto = _objetoEnvuelto
+    method embalar(cosa){
+        objetoEnvuelto = cosa
     }
 
     method peso() { return objetoEnvuelto.peso()}
