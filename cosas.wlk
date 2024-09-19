@@ -8,11 +8,13 @@ object knightRider {
 }
 
 object bumblebee{
-    var forma = null
+    var forma = null // property para poder hace el test
 
+    
     method forma(_forma){
         forma = _forma
     }
+    
 
     method peso(){  return 800 }
 
@@ -32,22 +34,22 @@ object robot{
 }
 
 //
-object ladrillos{
-    var  ladrillos = 0
+object paqueteLadrillos{
+    var  cantPaqueteLadrillos = 0
 
     method cargar(cantidad){
-        ladrillos = ladrillos + cantidad
+        cantPaqueteLadrillos = cantPaqueteLadrillos + cantidad
     }
 
-    method peso() { return ladrillos*2}
+    method peso() { return cantPaqueteLadrillos*2}
     method nivelPeligrosidad() { return 2 }
     method bulto() {
-        const bulto = if(ladrillos <= 100 ) 1 else if (ladrillos <= 300) 2 else 3
+        const bulto = if(cantPaqueteLadrillos <= 100 ) 1 else if (cantPaqueteLadrillos <= 300) 2 else 3
         return bulto
     }
 
     method cambio(){
-        ladrillos = ladrillos + 12
+        cantPaqueteLadrillos = cantPaqueteLadrillos + 12
     }
 }
 

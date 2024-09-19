@@ -2,7 +2,7 @@ import cosas.*
 import almacen.*
 
 object camion {
-	const property cosas = []
+	const property cosas = #{}
     const tara = 1000
     const pesoMaximo = 2500
 		
@@ -84,15 +84,15 @@ object camion {
     }
 
     method validarTransporte(destino, camino){
-        if(self.puedeTransportar(destino, camino)){
+        if(!self.puedeTransportar(destino, camino)){
             self.error("No se puede realizar el transporte")
         }
     }
 
     method puedeTransportar(destino, camino){
         return !self.excedidoDePeso() && 
-            !destino.tieneLugarPara(self) &&
-            !camino.puedeCircular(self) 
+            destino.tieneLugarPara(self) &&
+            camino.puedeCircular(self) 
     }
 
 
@@ -105,19 +105,19 @@ object ruta9{
     method nivelPeligrosidad() { return 11}
 
     method puedeCircular(vehiculo){
-        return vehiculo.puedenCircularEnRuta(self.nivelPeligrosidad())
+        return vehiculo.puedeCircularEnRuta(self.nivelPeligrosidad())
     }
 }
 
 object caminosVecinales{
-    method nivelPeligrosidad() { null}
+    method nivelPeligrosidad() { }
     var pesoMaximo = 0
 
     method pesoMaximo(_pesoMaximo){
         pesoMaximo = _pesoMaximo
     }
 
-    method puedeCiruclar(vehiculo){
+    method puedeCircular(vehiculo){
         return vehiculo.pesoTotal() <= pesoMaximo
     }
 
