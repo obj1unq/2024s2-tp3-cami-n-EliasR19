@@ -2,8 +2,8 @@ import camion.*
 import cosas.*
 import almacen.*
 
-describe "01 El camión Basico"{
-    test"Camion carga y descarga"{
+describe "1 El camión Basico"{
+    test"1.1Camion carga y descarga"{
         camion.cargar(knightRider)
         camion.cargar(bumblebee)
         camion.cargar(paqueteLadrillos)
@@ -22,7 +22,7 @@ describe "01 El camión Basico"{
         assert.equals(#{knightRider, bumblebee, paqueteLadrillos, arenaGranel, residuosRadiactivos}, camion.cosas())
     }
 
-    test" camion peso pruebas"{
+    test"1.2 camion peso pruebas"{
         camion.cargar(knightRider)
         camion.cargar(bumblebee)
         camion.cargar(residuosRadiactivos)
@@ -42,7 +42,7 @@ describe "01 El camión Basico"{
 
     }
 
-    test "camion nivel pruebas"{
+    test "1.3 camion nivel pruebas"{
         camion.cargar(paqueteLadrillos)
         camion.cargar(bateria)
         camion.cargar(contenedor)
@@ -63,8 +63,8 @@ describe "01 El camión Basico"{
 }
 
 
-describe "Las cosas"{
-    test"camion agregados"{
+describe "2 Las cosas"{
+    test"2.1 camion agregados"{
         camion.cargar(knightRider)
         camion.cargar(bumblebee)
         camion.cargar(residuosRadiactivos)
@@ -82,8 +82,8 @@ describe "Las cosas"{
 
     }
 }
-describe"consecuencias de la carga"{
-    test"consecuencias de cargar las cosas"{
+describe"3. consecuencias de la carga"{
+    test"3.1 consecuencias de cargar las cosas"{
         bumblebee.forma(auto)
         camion.cargar(bumblebee)
         //assert.equals(robot, bumblebee.forma()) // poner el property en el codigo
@@ -110,9 +110,9 @@ describe"consecuencias de la carga"{
     }
 }
 
-describe "Transporte"{
+describe "4 Transporte"{
 
-    test"Almacen almacena"{
+    test"4.1 Almacen almacena"{
         camion.cargar(knightRider)  //1 bulto
         camion.cargar(paqueteLadrillos) // < 100Ladrillos 1 bulto
 
@@ -133,7 +133,7 @@ describe "Transporte"{
 
 
     }
-    test"ruta9 da no error"{
+    test"4.2 ruta9 da no error"{
         camion.cargar(paqueteLadrillos)
         camion.cargar(bateria)
 
@@ -146,7 +146,7 @@ describe "Transporte"{
 
     }
 
-    test"caminos vecinales da error"{
+    test"4.3 caminos vecinales da error"{
         almacen.bultosMaximos(20)
 
         camion.cargar(paqueteLadrillos) 
