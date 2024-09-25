@@ -1,7 +1,8 @@
 import cosas.*
 import almacen.*
 
-object camion {
+
+class Camion {
 	const property cosas = #{}
     const tara = 1000
     const pesoMaximo = 2500
@@ -61,7 +62,8 @@ object camion {
     }
 
     method estaCosaEntre(cosa, min, max){
-        return cosa.peso() >= min && cosa.peso() <= max
+        //return cosa.peso() >= min && cosa.peso() <= max
+        return cosa.peso().between(min, max)
     }
 //
     method cosaMasPesada(){

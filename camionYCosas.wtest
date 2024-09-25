@@ -3,6 +3,7 @@ import cosas.*
 import almacen.*
 
 describe "1 El camión Basico"{
+    const camion = new Camion() 
     test"1.1Camion carga y descarga"{
         camion.cargar(knightRider)
         camion.cargar(bumblebee)
@@ -11,12 +12,14 @@ describe "1 El camión Basico"{
         camion.cargar(bateria)
         camion.cargar(contenedor)
         camion.cargar(residuosRadiactivos)
-        camion.cargar(embalaje)
 
-        assert.equals(#{knightRider, bumblebee, paqueteLadrillos, arenaGranel, bateria, contenedor, residuosRadiactivos,embalaje}, camion.cosas())
+        const arenaEmbalada = new Embalaje(objetoEnvuelto = arenaGranel)
+        camion.cargar(arenaEmbalada)
+
+        assert.equals(#{knightRider, bumblebee, paqueteLadrillos, arenaGranel, bateria, contenedor, residuosRadiactivos,arenaEmbalada}, camion.cosas())
 
 
-        camion.descargar(embalaje)
+        camion.descargar(arenaEmbalada)
         camion.descargar(bateria)
         camion.descargar(contenedor)
         assert.equals(#{knightRider, bumblebee, paqueteLadrillos, arenaGranel, residuosRadiactivos}, camion.cosas())
@@ -64,6 +67,7 @@ describe "1 El camión Basico"{
 
 
 describe "2 Las cosas"{
+    const camion = new Camion()
     test"2.1 camion agregados"{
         camion.cargar(knightRider)
         camion.cargar(bumblebee)
@@ -83,6 +87,7 @@ describe "2 Las cosas"{
     }
 }
 describe"3. consecuencias de la carga"{
+    const camion = new Camion()
     test"3.1 consecuencias de cargar las cosas"{
         bumblebee.forma(auto)
         camion.cargar(bumblebee)
@@ -111,6 +116,7 @@ describe"3. consecuencias de la carga"{
 }
 
 describe "4 Transporte"{
+    const camion = new Camion()
 
     test"4.1 Almacen almacena"{
         camion.cargar(knightRider)  //1 bulto

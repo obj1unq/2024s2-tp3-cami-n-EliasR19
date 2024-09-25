@@ -116,7 +116,7 @@ object residuosRadiactivos{
         }
     }
 
-object embalaje{
+class Embalaje{
     var  objetoEnvuelto = null
 
     method embalar(cosa){
